@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import android.view.View
 
 val TAG = "MainActivity"
 
@@ -63,16 +64,11 @@ class MainActivity : AppCompatActivity() {
             questionView.setText(questionBank[questionIndex].textResId)
         }
 
-        trueButton.setOnClickListener(){
-            val toast = Toast.makeText(applicationContext, "CORRECT", Toast.LENGTH_SHORT)
-            toast.show()}
-        falseButton.setOnClickListener(){
-            val toast = Toast.makeText(applicationContext, "WRONG", Toast.LENGTH_SHORT)
-            toast.show()}
-
+        trueButton.setOnClickListener { ansReview(ans = true) }
+        falseButton.setOnClickListener { ansReview(ans = false) }
     }
 
-    /*private fun ansReview (ans: Boolean){
+    private fun ansReview (ans: Boolean){
         if(ans && ans == questionBank[questionIndex].answer) {
             val toast = Toast.makeText(applicationContext, "CORRECT", Toast.LENGTH_SHORT)
             toast.show()
@@ -83,5 +79,5 @@ class MainActivity : AppCompatActivity() {
             val toast = Toast.makeText(applicationContext, "WRONG", Toast.LENGTH_SHORT)
             toast.show()
         }
-    }*/
+    }
 }
