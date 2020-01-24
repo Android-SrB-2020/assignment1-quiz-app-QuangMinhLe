@@ -1,16 +1,10 @@
 package com.example.android.quiz
 
-import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import android.view.View
-
-val TAG = "MainActivity"
-
 class MainActivity : AppCompatActivity() {
 
     private val questionBank = listOf(
@@ -53,22 +47,25 @@ class MainActivity : AppCompatActivity() {
         val trueButton: Button = findViewById(R.id.true_button)
         val falseButton: Button = findViewById(R.id.false_button)
 
+        //setup next button
         questionView.setText(questionBank[questionIndex].textResId)
         nextButton.setOnClickListener {
             questionIndex = (questionIndex + 1) % 20
             questionView.setText(questionBank[questionIndex].textResId)
         }
 
+        //setup back button
         backButton.setOnClickListener{
             questionIndex = (questionIndex - 1)
             questionView.setText(questionBank[questionIndex].textResId)
         }
 
-        trueButton.setOnClickListener { ansReview(ans = true) }
-        falseButton.setOnClickListener { ansReview(ans = false) }
+        trueButton.setOnClickListener { ansReveal(ans = true) }
+        falseButton.setOnClickListener { ansReveal(ans = false) }
     }
 
-    private fun ansReview (ans: Boolean){
+    //function that validates the answer
+    private fun ansReveal (ans: Boolean){
         if(ans && ans == questionBank[questionIndex].answer) {
             val toast = Toast.makeText(applicationContext, "CORRECT", Toast.LENGTH_SHORT)
             toast.show()
